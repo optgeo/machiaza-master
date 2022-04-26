@@ -1,0 +1,69 @@
+{
+  "version": 8,
+  "center": [
+    135,
+    35
+  ],
+  "zoom": 11.72,
+  "projection": {
+    "name": "lambertConformalConic",
+    "parallels": [
+      30,
+      60
+    ],
+    "center": [
+      140,
+      45
+    ]
+  },
+  "sources": {
+    "v": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:9966/zxy/{z}/{x}/{y}.pbf"
+      ],
+      "maxzoom": 12,
+      "attribution": "<a href=\"https://www.digital.go.jp/policies/base_registry_address/\">アドレス・ベース・レジストリ</a>町字マスター（デジタル庁）を加工して作成"
+    },
+    "satellite": {
+      "type": "raster",
+      "url": "mapbox://mapbox.satellite"
+    }
+  },
+  "sprite": "https://sprites.geolonia.com/basic",
+  "glyphs": "https://hfu.github.io/openmaptiles-fonts/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "type": "raster",
+      "id": "satellite",
+      "source": "satellite",
+      "paint": {
+        "raster-contrast": 0.5,
+        "raster-brightness-max": 0.89,
+        "raster-fade-duration": 500
+      }
+    },
+    {
+      "type": "heatmap",
+      "id": "machiaza",
+      "source": "v",
+      "source-layer": "machiaza",
+      "paint": {
+        "heatmap-radius": [
+          "interpolate",
+          [
+            "exponential",
+            2
+          ],
+          [
+            "zoom"
+          ],
+          0,
+          4,
+          20,
+          128
+        ]
+      }
+    }
+  ]
+}

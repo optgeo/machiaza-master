@@ -1,0 +1,26 @@
+body { margin:0; padding:0; font-family: 'Roboto', sans-serif; color: #333333}
+#map { top:0; height: 100vh; width: 100vw; position: fixed; z-index: 0; }
+#filter {
+  top:0; height: 100vh; width: 100vw; position: fixed; z-index: 2;
+  pointer-events: none;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  -webkit-mask-image: linear-gradient(
+    0deg, 
+    rgba(0,0,0,1) 0%, 
+    rgba(0,0,0,1) 4%, 
+    rgba(0,0,0,0) 40%, 
+    rgba(0,0,0,0) 50%, 
+    rgba(0,0,0,1) 90%, 
+    rgba(0,0,0,1) 100%
+  );
+  mask-image: linear-gradient(
+    0deg, 
+    rgba(0,0,0,1) 0%, 
+    rgba(0,0,0,1) 4%, 
+    rgba(0,0,0,0) 40%, 
+    rgba(0,0,0,0) 50%, 
+    rgba(0,0,0,1) 90%, 
+    rgba(0,0,0,1) 100%
+  );
+}
