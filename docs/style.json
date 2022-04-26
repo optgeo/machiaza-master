@@ -20,7 +20,7 @@
     "v": {
       "type": "vector",
       "tiles": [
-        "http://localhost:9966/zxy/{z}/{x}/{y}.pbf"
+        "https://optgeo.github.io/machiaza-master/zxy/{z}/{x}/{y}.pbf"
       ],
       "maxzoom": 12,
       "attribution": "<a href=\"https://www.digital.go.jp/policies/base_registry_address/\">アドレス・ベース・レジストリ</a>町字マスター（デジタル庁）を加工して作成"
