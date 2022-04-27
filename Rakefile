@@ -35,11 +35,35 @@ task :pos do
   }
 end
 
-task :tippecanoe do
+task :csv do
+  print "id,pref,city,name\n"
+  1.upto(47) {|i|
+    first = true
+    pref = sprintf('%02d', i)
+    path = "#{SRC_DIR}/mt_town_pref#{pref}.csv"
+    File.foreach(path) {|l|
+      if first
+        first = false
+      else
+        r = l.strip.split(',')
+        print <<-EOS
+#{r[0] + r[1]},#{r[3]},#{r[6] + r[9] + r[12]},#{r[15] + r[18] + r[21]}
+        EOS
+      end
+    }
+  }
+end
+
+task :tiles do
   sh <<-EOS
-rake pos | tippecanoe -f --maximum-zoom=12 --base-zoom=12 \
--rg --drop-densest-as-needed \
---no-tile-compression --output-to-directory=docs/zxy
+rake csv > match.csv; \
+rake pos | tippecanoe -f --maximum-zoom=14 --base-zoom=14 \
+-r1.2 --drop-densest-as-needed --output=a.mbtiles; \
+tile-join -f --output=b.mbtiles --maximum-zoom=11 a.mbtiles; \
+tile-join -f --output=c.mbtiles --minimum-zoom=12 --csv=match.csv a.mbtiles; \
+tile-join -f --no-tile-size-limit --no-tile-compression \
+--output-to-directory=docs/zxy b.mbtiles c.mbtiles; \
+rm match.csv a.mbtiles b.mbtiles c.mbtiles
   EOS
 end
 

@@ -11,8 +11,9 @@ sources:
   v:
     type: vector
     tiles:
+#      - http://localhost:9966/zxy/{z}/{x}/{y}.pbf
       - https://optgeo.github.io/machiaza-master/zxy/{z}/{x}/{y}.pbf
-    maxzoom: 12
+    maxzoom: 14
     attribution: <a href="https://www.digital.go.jp/policies/base_registry_address/">アドレス・ベース・レジストリ</a>町字マスター（デジタル庁）を加工して作成
   satellite:
     type: raster
@@ -41,3 +42,44 @@ layers:
         - 4
         - 20
         - 128
+  - type: symbol
+    id: text
+    source: v
+    source-layer: machiaza
+    minzoom: 12
+    layout:
+      text-field: 
+        - step
+        - - zoom
+        - - get
+          - name
+        - 16
+        - - concat
+          - - get
+            - city
+          - - get
+            - name
+        - 18
+        - - concat
+          - - get
+            - pref
+          - - get
+            - city
+          - - get
+            - name
+      text-anchor: center
+      text-size:
+        - interpolate
+        - - exponential
+          - 2
+        - - zoom
+        - 12
+        - 8
+        - 20
+        - 120
+      text-font:
+        - Noto Sans Regular
+    paint:
+      text-halo-width: 2
+      text-halo-color: white
+   
